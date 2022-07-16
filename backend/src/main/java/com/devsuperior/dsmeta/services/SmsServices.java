@@ -40,14 +40,14 @@ public class SmsServices {
 		  
 		 String date =sale.getDate().getMonthValue() +"/" +sale.getDate().getYear();
 				 
-		  String msg =" O cidadão" + sale.getSellerName() + "foi preso em" + date +  "na cidade de Lavras com drogas " ;
+		  String msg =" O cidadão" + sale.getSellerName() + " O cidadão Paulo freire , estudante  de Agronomia da UFla apanha de travestir por nao pagar o programa do viado"  ;
 
 		Twilio.init(twilioSid, twilioKey);
 
 		PhoneNumber to = new PhoneNumber(twilioPhoneTo);
 		PhoneNumber from = new PhoneNumber(twilioPhoneFrom);
 
-		Message message = Message.creator(to, from, "msg").create();
+		Message message = Message.creator(to, from, msg).create();
 
 		System.out.println(message.getSid());
 	}
