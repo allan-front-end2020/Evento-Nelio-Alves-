@@ -8,21 +8,30 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/resquest";
 
 function SalesCard() {
+
+    const min = new Date(new Date().setDate(new Date().getDate() -365))
+    const max =new Date();
    
 
-    const [minDate, setMindate] =useState(new Date());
-    const [maxDate, setMaxdate]  =useState(new Date());
+    const [minDate, setMindate] =useState(min);
+    const [maxDate, setMaxdate]  =useState(max);
 
     const [sales , setSales] = useState<Sale[]>([])
 
 
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/sales`)
+        const dmin = minDate.toISOString().slice(0,10);
+        const dmax = maxDate.toISOString().slice(0,10);
+
+     console.log(dmin)
+
+
+        axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
         .then(response =>{
-           setSales(response.data.content)
+           setSales(response.data.content);
         })
-    }, [])
+    }, [minDate, maxDate]);
 
     return (
         <div className="dsmeta-card">
